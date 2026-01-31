@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilco.Handmade - Jajanan Pasar Autentik</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Modal Original --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 3000; 
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 25px;
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+        @keyframes zoomIn {
+            from {transform: scale(0.8); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+        .close-modal {
+            position: absolute;
+            right: 20px; top: 10px;
+            font-size: 35px; cursor: pointer;
+            color: #999;
+        }
+        .modal-body {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .modal-img { flex: 1; min-width: 250px; }
+        .modal-img img { width: 100%; border-radius: 15px; height: 250px; object-fit: cover; }
+        .modal-info { flex: 1; min-width: 250px; }
+        .modal-info h2 { color: var(--sugar); margin-bottom: 10px; }
+        .modal-info .price { color: var(--sage); font-size: 22px; font-weight: 800; margin-bottom: 15px; }
+        .modal-info p { color: #666; line-height: 1.6; font-size: 15px; }
+
+        /* Updated Modal Body Layout */
+        .modal-body { 
+            display: flex; 
+            gap: 30px; 
+            flex-wrap: wrap; 
+            align-items: stretch; /* Membuat kolom foto dan info sama tinggi */
+        }
+        .modal-img { flex: 1; min-width: 250px; }
+        .modal-img img { width: 100%; border-radius: 15px; height: 100%; min-height: 250px; object-fit: cover; }
+        
+        .modal-info { 
+            flex: 1; 
+            min-width: 250px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; /* Mendorong tombol ke bawah agar sejajar foto */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-container">
+        <div class="logo">Bilco.<span>Handmade</span></div>
+        
+        <nav id="mainNav">
+            <a href="index.html" class="active">Beranda</a>
+            <a href="katalog.html">Katalog</a>
+            <a href="paket.html">Paket Snack Box</a>
+            <a href="tentang.html">Tentang Kami</a>
+        </nav>
+
+        <div class="nav-icons">
+            <a href="keranjang.html" style="text-decoration: none; color: inherit;">
+                <div class="cart-icon">🛒<span id="cart-count">0</span></div>
+            </a>
+
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <section class="hero">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>Tradisi Rasa di Setiap Gigitan</h1>
+                <p>Jajanan pasar premium dengan bahan alami, tanpa pengawet, dan dibuat fresh setiap hari.</p>
+                <div class="hero-btns">
+                    <a href="katalog.html" class="btn-primary" style="text-decoration:none">Pesan Satuan</a>
+                    <a href="paket.html" class="btn-secondary" style="text-decoration:none">Paket Snack Box</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="promo-bar">
+        <marquee>🔥 PROMO HARI INI: Diskon 10% untuk Paket Snack Box! 🍃 Gratis Ongkir radius 5km dari Kebayoran! ✨</marquee>
+    </div>
+
+    <section style="background: white; padding: 80px 0; border-bottom: 1px solid #f0f0f0;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <span style="color: var(--sage); font-weight: 700; letter-spacing: 2px; font-size: 12px; text-transform: uppercase;">Kualitas Kami</span>
+                <h2 style="font-size: 32px; color: var(--sugar); margin-top: 10px;">Mengapa Memilih Bilco.Handmade?</h2>
+                <p style="opacity: 0.7; max-width: 600px; margin: 15px auto 0;">Kami berkomitmen menjaga kualitas setiap gigitan dengan standar yang tidak berkompromi.</p>
+            </div>
+
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; text-align: center;">
+                <div style="max-width: 280px; padding: 20px;">
+                    <div style="font-size: 45px; margin-bottom: 20px;">🌿</div>
+                    <h4 style="color: var(--sugar); margin-bottom: 12px; font-size: 18px;">100% Bahan Alami</h4>
+                    <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Tanpa pemanis buatan dan pengawet. Kami hanya menggunakan santan peras murni dan gula aren pilihan.</p>
+                </div>
+                <div style="max-width: 280px; padding: 20px;">
+                    <div style="font-size: 45px; margin-bottom: 20px;">👨‍🍳</div>
+                    <h4 style="color: var(--sugar); margin-bottom: 12px; font-size: 18px;">Freshly Handmade</h4>
+                    <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Bukan hasil pabrik. Semua jajanan dibuat handmade setiap subuh untuk menjaga kesegaran rasa.</p>
+                </div>
+                <div style="max-width: 280px; padding: 20px;">
+                    <div style="font-size: 45px; margin-bottom: 20px;">🧼</div>
+                    <h4 style="color: var(--sugar); margin-bottom: 12px; font-size: 18px;">Sangat Higienis</h4>
+                    <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Kebersihan dapur adalah prioritas kami. Dikemas secara rapat dan aman agar sampai dengan sempurna.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 80px 20px;">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <span style="color: var(--sage); font-weight: 700; letter-spacing: 2px; font-size: 12px; text-transform: uppercase;">Favorit Pelanggan</span>
+            <h2 style="font-size: 36px; color: var(--sugar); margin-top: 10px;">Produk Terlaris</h2>
+            <div style="width: 50px; height: 3px; background: var(--sage); margin: 15px auto;"></div>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="tag-populer">Best Seller</div>
+                <img src="https://cdn0-production-images-kly.akamaized.net/1Ml6VSBufvcBe78RrwCnmzEoKY8=/0x0:4179x2355/469x260/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3626983/original/016089800_1636430175-shutterstock_1956967348.jpg" alt="Kue Talam">
+                <div class="card-info" style="padding: 20px 0; text-align: center;">
+                    <h4>Kue Talam Pandan</h4>
+                    <p style="color: var(--sage); font-weight: 800; font-size: 1.2rem;">Rp 3.500</p>
+                    <button class="btn-primary" style="width: 90%; margin-top: 15px; border:none; cursor:pointer;" 
+                        onclick="openDetail('Kue Talam Pandan', 'Rp 3.500', 'https://cdn0-production-images-kly.akamaized.net/1Ml6VSBufvcBe78RrwCnmzEoKY8=/0x0:4179x2355/469x260/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3626983/original/016089800_1636430175-shutterstock_1956967348.jpg', 'Kue tradisional dengan tekstur lembut, rasa pandan asli di lapisan bawah dan gurihnya santan di lapisan atas.')">
+                        Lihat Detail
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="tag-populer">Best Seller</div>
+                <img src="https://cdn0-production-images-kly.akamaized.net/Ub0mS5vcf2vLUtmh0DqiUb_xw64=/0x63:999x626/1200x675/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4656610/original/082756800_1700535102-shutterstock_2206874439.jpg" alt="Risol Mayo">
+                <div class="card-info" style="padding: 20px 0; text-align: center;">
+                    <h4>Risol Mayo Premium</h4>
+                    <p style="color: var(--sage); font-weight: 800; font-size: 1.2rem;">Rp 5.000</p>
+                    <button class="btn-primary" style="width: 90%; margin-top: 15px; border:none; cursor:pointer;" 
+                        onclick="openDetail('Risol Mayo Premium', 'Rp 5.000', 'https://cdn0-production-images-kly.akamaized.net/Ub0mS5vcf2vLUtmh0DqiUb_xw64=/0x63:999x626/1200x675/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4656610/original/082756800_1700535102-shutterstock_2206874439.jpg', 'Kulit risol yang renyah dengan isian potongan telur, smoked beef, dan saus mayones spesial yang creamy.')">
+                        Lihat Detail
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="tag-populer">Best Seller</div>
+                <img src="https://asset.kompas.com/crops/GLtNe54eeZHCZkBFnlO6-zKm7bU=/0x292:1000x959/1200x800/data/photo/2021/08/02/61081f8d3a20b.jpg" alt="Lemper">
+                <div class="card-info" style="padding: 20px 0; text-align: center;">
+                    <h4>Lemper Ayam</h4>
+                    <p style="color: var(--sage); font-weight: 800; font-size: 1.2rem;">Rp 4.500</p>
+                    <button class="btn-primary" style="width: 90%; margin-top: 15px; border:none; cursor:pointer;" 
+                        onclick="openDetail('Lemper Ayam', 'Rp 4.500', 'https://asset.kompas.com/crops/GLtNe54eeZHCZkBFnlO6-zKm7bU=/0x292:1000x959/1200x800/data/photo/2021/08/02/61081f8d3a20b.jpg', 'Ketan pulen yang diisi dengan suwiran ayam bumbu rempah melimpah.')">
+                        Lihat Detail
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="tag-populer">Best Seller</div>
+                <img src="https://cdn.grid.id/crop/0x0:0x0/700x465/smart/filters:format(webp):quality(100)/photo/sasefoto/original/39066_kue-ku-aneka-buah.jpg" alt="Kue Ku">
+                <div class="card-info" style="padding: 20px 0; text-align: center;">
+                    <h4>Kue Ku Merah</h4>
+                    <p style="color: var(--sage); font-weight: 800; font-size: 1.2rem;">Rp 3.500</p>
+                    <button class="btn-primary" style="width: 90%; margin-top: 15px; border:none; cursor:pointer;" 
+                        onclick="openDetail('Kue Ku Merah', 'Rp 3.500', 'https://cdn.grid.id/crop/0x0:0x0/700x465/smart/filters:format(webp):quality(100)/photo/sasefoto/original/39066_kue-ku-aneka-buah.jpg', 'Kue tradisional dengan tekstur kenyal dari tepung ketan yang diisi dengan kacang hijau kupas yang manis dan lembut.')">
+                        Lihat Detail
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="katalog.html" style="color: var(--sugar); font-weight: 700; text-decoration: underline;">Lihat Semua Menu Satuan →</a>
+        </div>
+    </section>
+
+    <section style="background-color: var(--sage-light); padding: 80px 0;">
+        <div class="container">
+            <div style="display: flex; align-items: center; gap: 50px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <img src="https://www.kedainyonyarumah.com/wp-content/uploads/2023/10/snack-box-1.jpg" alt="Snack Box" style="width: 100%; border-radius: 20px; box-shadow: 20px 20px 0 var(--white);">
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <h2 style="font-size: 32px; color: var(--sugar); line-height: 1.2;">Butuh Konsumsi untuk Acara Anda?</h2>
+                    <p style="margin: 20px 0; font-size: 18px; opacity: 0.9;">Kami melayani pesanan <strong>Snack Box</strong> untuk Rapat, Arisan, hingga Syukuran dengan kemasan yang cantik.</p>
+                    <ul style="list-style: none; margin-bottom: 30px;">
+                        <li style="margin-bottom: 12px;">✅ Bebas pilih kombinasi kue</li>
+                        <li style="margin-bottom: 12px;">✅ Tersedia opsi kartu ucapan custom</li>
+                        <li style="margin-bottom: 12px;">✅ Pengiriman tepat waktu & aman</li>
+                    </ul>
+                    <a href="paket.html" class="btn-primary" style="text-decoration: none;">Cek Pilihan Paket Box</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h2 class="logo" style="color: white; margin-bottom: 20px;">Bilco.<span>Handmade</span></h2>
+                <p>Membawa kehangatan jajanan tradisional ke dalam kemasan modern yang higienis dan elegan.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Navigasi</h3>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="katalog.html">Katalog Produk</a></li>
+                    <li><a href="paket.html">Paket Snack Box</a></li>
+                    <li><a href="tentang.html">Tentang Kami</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Hubungi Kami</h3>
+                <p>📍 Perum Puri Majapahit, Mojokerto</p>
+                <p>📞 0822-3461-8099</p>
+                <p>✉️ halo@bilcohandmade.id</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Jam Operasional</h3>
+                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; font-size: 14px; line-height: 1.6;">
+                    <p>Senin - Sabtu: 08.00 - 17.00</p>
+                    <p>Minggu: Tutup</p>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 12px; margin-top: 40px; opacity: 0.7;">
+            &copy; 2026 Bilco.Handmade. Semua Hak Dilindungi.
+        </div>
+    </footer>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeDetail()">&times;</span>
+            <div class="modal-body">
+                <div class="modal-img">
+                    <img id="modalImg" src="" alt="Produk">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modalTitle">Nama Produk</h2>
+                    <p id="modalPrice" class="price">Rp 0</p>
+                    <p id="modalDesc">Deskripsi akan muncul di sini.</p>
+                    <div style="margin-top: 25px;">
+                        <button class="btn-primary" style="width: 100%; border:none; cursor:pointer;" onclick="addToCart()">Tambah ke Keranjang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/6282234618099" class="wa-float">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
+        <span>Tanya Admin</span>
+    </a>
+
+    <script>
+        // 1. Inisialisasi Keranjang dari LocalStorage
+        let cart = JSON.parse(localStorage.getItem('bilcoCart')) || [];
+
+        // 2. Fungsi Menu Hamburger
+        function toggleMenu() {
+            const nav = document.getElementById("mainNav");
+            const hamburger = document.querySelector(".hamburger");
+            nav.classList.toggle("active");
+            hamburger.classList.toggle("active");
+        }
+
+        // 3. Fungsi Modal Detail
+        const modal = document.getElementById("productModal");
+        function openDetail(title, price, img, desc) {
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalPrice").innerText = price;
+            document.getElementById("modalImg").src = img;
+            document.getElementById("modalDesc").innerText = desc;
+            modal.style.display = "block";
+        }
+
+        function closeDetail() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeDetail();
+            }
+        }
+
+        // 4. LOGIKA SISTEM KERANJANG
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                const totalQty = cart.reduce((total, item) => total + item.qty, 0);
+                badge.innerText = totalQty;
+            }
+        }
+
+        function addToCart() {
+            // Ambil data dari modal yang sedang terbuka
+            const name = document.getElementById('modalTitle').innerText;
+            const priceText = document.getElementById('modalPrice').innerText;
+            const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+            const img = document.getElementById('modalImg').src;
+
+            // Cek apakah item sudah ada
+            const existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ name, price, img, qty: 1 });
+            }
+
+            // Simpan ke LocalStorage
+            localStorage.setItem('bilcoCart', JSON.stringify(cart));
+            
+            // Update angka di header
+            updateCartBadge();
+            
+            // Beri notifikasi
+            alert(name + " berhasil ditambahkan ke keranjang!");
+            closeDetail();
+        }
+
+        // Jalankan update badge saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
+    </script>
+
+</body>
+</html>
